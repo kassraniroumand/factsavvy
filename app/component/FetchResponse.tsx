@@ -54,7 +54,7 @@ export function InputForm() {
         const signal = abortControllerRef.current.signal;
 
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URI}/stream_query`, {
+            const response = await fetch(`//api.factsavvy.ai/stream_query`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({query, similarity_top_k: 5}),
