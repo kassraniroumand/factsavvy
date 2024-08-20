@@ -8,6 +8,7 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: {
@@ -33,34 +34,48 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
-      <head />
+      <html suppressHydrationWarning lang="en">
+      <head>
+        <Script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-8RLFK818BF"
+        ></Script>
+        <Script id="google-analytics">
+          {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+            
+              gtag('config', 'G-8RLFK818BF');
+          `}
+        </Script>
+      </head>
       <body
-        className={clsx(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
-        )}
+          className={clsx(
+              "min-h-screen bg-background font-sans antialiased",
+              fontSans.variable,
+          )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-          <div className="relative">
-            <Navbar />
-            <main className="container mx-auto max-w-7xl px-2 py-4 sm:py-6 flex-grow">
-              {children}
-            </main>
-            {/*<footer className="w-full flex items-center justify-center py-3">*/}
-            {/*  <Link*/}
-            {/*    isExternal*/}
-            {/*    className="flex items-center gap-1 text-current"*/}
-            {/*    href="https://nextui-docs-v2.vercel.app?utm_source=next-app-template"*/}
-            {/*    title="nextui.org homepage"*/}
-            {/*  >*/}
-            {/*    <span className="text-default-600">Powered by</span>*/}
-            {/*    <p className="text-primary">NextUI</p>*/}
-            {/*  </Link>*/}
-            {/*</footer>*/}
-          </div>
-        </Providers>
+      <Providers themeProps={{attribute: "class", defaultTheme: "light"}}>
+        <div className="relative">
+          <Navbar/>
+          <main className="container mx-auto max-w-7xl px-2 py-4 sm:py-6 flex-grow">
+            {children}
+          </main>
+          {/*<footer className="w-full flex items-center justify-center py-3">*/}
+          {/*  <Link*/}
+          {/*    isExternal*/}
+          {/*    className="flex items-center gap-1 text-current"*/}
+          {/*    href="https://nextui-docs-v2.vercel.app?utm_source=next-app-template"*/}
+          {/*    title="nextui.org homepage"*/}
+          {/*  >*/}
+          {/*    <span className="text-default-600">Powered by</span>*/}
+          {/*    <p className="text-primary">NextUI</p>*/}
+          {/*  </Link>*/}
+          {/*</footer>*/}
+        </div>
+      </Providers>
       </body>
-    </html>
+      </html>
   );
 }
