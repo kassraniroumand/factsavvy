@@ -54,7 +54,7 @@ export function InputForm() {
         const signal = abortControllerRef.current.signal;
 
         try {
-            const response = await fetch(`//api.factsavvy.ai/stream_query`, {
+            const response = await fetch(`https://jftpax5wqp.eu-west-2.awsapprunner.com/stream_query`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({query, similarity_top_k: 5}),
